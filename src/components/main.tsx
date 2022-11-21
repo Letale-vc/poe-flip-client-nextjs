@@ -4,7 +4,10 @@ import { Box } from '@mui/system'
 import { Button } from '@mui/material'
 import { CardTypes, PoeFlipDataType } from '../types/card-types'
 import Link from '../Link'
-import { useGetPoeFlipDataQuery } from '../../lib/api-config'
+import {
+  useGetPoeFlipDataQuery,
+  useStartUpdatePoeFlipDataMutation
+} from '../../lib/api-config'
 
 const columns: GridColDef[] = [
   {
@@ -99,18 +102,13 @@ const columns: GridColDef[] = [
 
 export const Main: FC<{ flipData: PoeFlipDataType }> = ({ flipData }) => {
   const { data = flipData, isFetching, refetch } = useGetPoeFlipDataQuery()
-
-  const handlerPoeTradeUpdate = async () => {
-    await fetch(`http://localhost:3000/api/poe-data`, {
-      method: 'PUT'
-    }).catch((error) => {
-      console.log(error)
-    })
+  const [startUpdateData, result] = useStartUpdatePoeFlipDataMutation()
+  const handlerPoeTradeUpdate = () => {
+    startUpdateData()
   }
-  useEffect(() => {})
 
   useEffect(() => {
-    const interval = setInterval(refetch, 5000)
+    const interval = setInterval(refetch, 30000)
     return () => {
       clearInterval(interval)
     }

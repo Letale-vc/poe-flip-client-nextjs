@@ -12,11 +12,12 @@ export const roboto = Roboto({
 // Create a theme instance.
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#556cd6'
+      main: '#90caf9'
     },
     secondary: {
-      main: '#19857b'
+      main: '#ce93d8'
     },
     error: {
       main: red.A400

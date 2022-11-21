@@ -8,9 +8,9 @@ export const getServerSideProps: GetServerSideProps =
     await store.dispatch(getPoeFlipData.initiate())
 
     await Promise.all(store.dispatch(getRunningQueriesThunk()))
-    const { data: flipData } = getPoeFlipData.select()(store.getState())
+    const { data } = getPoeFlipData.select()(store.getState())
     return {
-      props: { flipData }
+      props: { flipData: data || [] }
     }
   })
 
