@@ -2,18 +2,18 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { FC, useEffect } from 'react'
 import { Box } from '@mui/system'
 import { Button } from '@mui/material'
-import { CardTypes, PoeFlipDataType } from '../types/card-types'
-import Link from '../Link'
+import { FlipItemTypes, PoeFlipDataType } from '../../types/flipItemTypes'
+import Link from '../../Link'
 import {
   useGetPoeFlipDataQuery,
   useStartUpdatePoeFlipDataMutation
-} from '../../lib/api-config'
+} from '../../../lib/apiConfig'
 
 const columns: GridColDef[] = [
   {
     field: 'card',
     headerName: 'card',
-    renderCell: (params: GridRenderCellParams<string, CardTypes>) => (
+    renderCell: (params: GridRenderCellParams<string, FlipItemTypes>) => (
       <Link href={params.row.cardInfo.poeTradeLink} target="_blank">
         {params.row.cardInfo.name}
       </Link>
@@ -24,7 +24,7 @@ const columns: GridColDef[] = [
     field: 'item',
     headerName: 'item',
     width: 200,
-    renderCell: (params: GridRenderCellParams<string, CardTypes>) => (
+    renderCell: (params: GridRenderCellParams<string, FlipItemTypes>) => (
       <Link href={params.row.itemInfo.poeTradeLink} target="_blank">
         {params.row.itemInfo.name}
       </Link>
@@ -34,7 +34,7 @@ const columns: GridColDef[] = [
     field: 'stackSize',
     headerName: 'stackSize',
     type: 'number',
-    renderCell: (params: GridRenderCellParams<string, CardTypes>) => (
+    renderCell: (params: GridRenderCellParams<string, FlipItemTypes>) => (
       <p>{params.row.cardInfo.stackSize}</p>
     )
   },
@@ -42,7 +42,7 @@ const columns: GridColDef[] = [
     field: 'chaosPrice',
     headerName: 'cardChaos',
     type: 'number',
-    renderCell: (params: GridRenderCellParams<string, CardTypes>) => (
+    renderCell: (params: GridRenderCellParams<string, FlipItemTypes>) => (
       <p>{params.row.cardInfo.chaosPrice}</p>
     )
   },
@@ -50,7 +50,7 @@ const columns: GridColDef[] = [
     field: 'cardDivineValue',
     headerName: 'cardDivine',
     type: 'number',
-    renderCell: (params: GridRenderCellParams<string, CardTypes>) => (
+    renderCell: (params: GridRenderCellParams<string, FlipItemTypes>) => (
       <p>{params.row.cardInfo.divinePrice}</p>
     )
   },
@@ -58,7 +58,7 @@ const columns: GridColDef[] = [
     field: 'itemChaosValue',
     headerName: 'itemChaos',
     type: 'number',
-    renderCell: (params: GridRenderCellParams<string, CardTypes>) => (
+    renderCell: (params: GridRenderCellParams<string, FlipItemTypes>) => (
       <p>{params.row.itemInfo.chaosPrice}</p>
     )
   },
@@ -67,7 +67,7 @@ const columns: GridColDef[] = [
     field: 'itemDivineValue',
     headerName: 'itemDivine',
     type: 'number',
-    renderCell: (params: GridRenderCellParams<string, CardTypes>) => (
+    renderCell: (params: GridRenderCellParams<string, FlipItemTypes>) => (
       <p>{params.row.itemInfo.divinePrice}</p>
     )
   },

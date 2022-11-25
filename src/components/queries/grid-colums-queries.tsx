@@ -1,10 +1,10 @@
 import { IconButton } from '@mui/material'
 import { GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { FlipQueryType } from '../../types/flip-queries'
+import { FlipQueryTypes } from '../../types/flipQueryTypes'
 
 export const createQueriesColumns = (
-  funDelete: (row: FlipQueryType) => void
+  funDelete: (row: FlipQueryTypes) => void
 ) => [
   {
     field: 'cardToItem',

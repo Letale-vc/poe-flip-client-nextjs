@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
-import { Main } from '../src/components/main'
+import { Main } from '../src/components/main/main'
 import { wrapper } from '../lib/store'
-import { getPoeFlipData, getRunningQueriesThunk } from '../lib/api-config'
+import { getPoeFlipData, getRunningQueriesThunk } from '../lib/apiConfig'
 
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async () => {

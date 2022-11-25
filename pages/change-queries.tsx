@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import { getPoeFlipQuery, getRunningQueriesThunk } from '../lib/api-config'
+import { getPoeFlipQuery, getRunningQueriesThunk } from '../lib/apiConfig'
 import { wrapper } from '../lib/store'
 import { QueriesList } from '../src/components/queries/queries-list'
 
