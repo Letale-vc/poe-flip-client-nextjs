@@ -10,7 +10,7 @@ export const getServerSideProps: GetServerSideProps =
     await Promise.all(store.dispatch(getRunningQueriesThunk()))
     const { data } = getPoeFlipData.select()(store.getState())
     return {
-      props: { flipData: data || [] }
+      props: { flipData: data || { cards: [], gems: [] } }
     }
   })
 
