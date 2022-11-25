@@ -5,8 +5,8 @@ import {
   fetchBaseQuery
 } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
-import { PoeFlipDataType } from '../src/types/card-types'
-import { FlipQueryType, NewFlipQueryType } from '../src/types/flip-queries'
+import { PoeFlipDataType } from '../src/types/flipItemTypes'
+import { FlipQueryTypes, NewFlipQueryType } from '../src/types/flipQueryTypes'
 
 interface ErrorType {
   data: { statusCode: number; message: string[]; error: string }
@@ -22,7 +22,7 @@ export const poeFlipApi = createApi({
       return action.payload[reducerPath]
     }
   },
-  tagTypes: ['poeQueries', 'poeFlipData'],
+  tagTypes: ['flipQueries', 'flip-data'],
   endpoints: (builder) => ({
     getPoeFlipData: builder.query<PoeFlipDataType, void>({
       query: () => ({ url: 'poe-data' })
@@ -33,45 +33,45 @@ export const poeFlipApi = createApi({
         method: 'PUT'
       })
     }),
-    getPoeFlipQuery: builder.query<FlipQueryType[], void>({
+    getPoeFlipQuery: builder.query<FlipQueryTypes[], void>({
       query: () => ({
-        url: 'poeQueries'
+        url: 'flipQueries'
       }),
       providesTags: (result) =>
         result
           ? [
               ...result.map(
-                ({ uuid }) => ({ type: 'poeQueries', uuid } as const)
+                ({ uuid }) => ({ type: 'flipQueries', uuid } as const)
               )
             ]
-          : [{ type: 'poeQueries', uuid: 'newQuery' }]
+          : [{ type: 'flipQueries', uuid: 'newQuery' }]
     }),
-    deletePoeFlipQuery: builder.mutation<void, FlipQueryType>({
+    deletePoeFlipQuery: builder.mutation<void, FlipQueryTypes>({
       query: (arg) => ({
-        url: 'poeQueries',
+        url: 'flipQueries',
         method: 'DELETE',
         body: arg
       }),
       invalidatesTags: (result, error, { uuid }) => [
-        { type: 'poeQueries', uuid }
+        { type: 'flipQueries', uuid }
       ]
     }),
     addFlipQuery: builder.mutation<void, NewFlipQueryType>({
       query: (arg) => ({
-        url: 'poeQueries',
+        url: 'flipQueries',
         method: 'POST',
         body: arg
       }),
-      invalidatesTags: () => [{ type: 'poeQueries', uuid: 'newQuery' }]
+      invalidatesTags: () => [{ type: 'flipQueries' }]
     }),
-    editFlipQuery: builder.mutation<void, FlipQueryType>({
+    editFlipQuery: builder.mutation<void, FlipQueryTypes>({
       query: (arg) => ({
-        url: 'poeQueries',
+        url: 'flipQueries',
         method: 'PUT',
         body: arg
       }),
       invalidatesTags: (result, error, { uuid }) => [
-        { type: 'poeQueries', uuid }
+        { type: 'flipQueries', uuid }
       ]
     })
   })

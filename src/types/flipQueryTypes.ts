@@ -3,6 +3,6 @@ export interface NewFlipQueryType {
   itemQuery: string
 }
 
-export interface FlipQueryType extends NewFlipQueryType {
+export interface FlipQueryTypes extends NewFlipQueryType {
   uuid: string
 }
