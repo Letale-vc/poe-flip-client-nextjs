@@ -129,7 +129,9 @@ export const Main: FC<{ flipData: PoeFlipDataType }> = ({ flipData }) => {
           update poe trade
         </Button>
         <Box marginLeft={2} flexGrow={1}>
-          <p>{`Last update --- ${data.lastUpdate}`}</p>
+          <p suppressHydrationWarning>{`Last update:  ${
+            data.lastUpdate && new Date(data.lastUpdate).toLocaleString()
+          }`}</p>
         </Box>
         <Button component={Link} href="/change-queries">
           change queries
