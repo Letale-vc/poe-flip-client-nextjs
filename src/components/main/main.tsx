@@ -102,7 +102,7 @@ const columns: GridColDef[] = [
 
 export const Main: FC<{ flipData: PoeFlipDataType }> = ({ flipData }) => {
   const { data = flipData, isFetching, refetch } = useGetPoeFlipDataQuery()
-  const [startUpdateData, result] = useStartUpdatePoeFlipDataMutation()
+  const [startUpdateData] = useStartUpdatePoeFlipDataMutation()
   const handlerPoeTradeUpdate = () => {
     startUpdateData()
   }
