@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next'
 import { getPoeFlipQuery, getRunningQueriesThunk } from '../lib/apiConfig'
 import { wrapper } from '../lib/store'
-import { QueriesList } from '../src/components/queries/queries-list'
+import { QueriesList, QueriesListPropsType } from '../src/components/queries/queries-list'
 
 export default QueriesList
-export const getServerSideProps: GetServerSideProps =
+export const getServerSideProps: GetServerSideProps<QueriesListPropsType> =
   wrapper.getServerSideProps((store) => async () => {
     await store.dispatch(getPoeFlipQuery.initiate())
     await Promise.all(store.dispatch(getRunningQueriesThunk()))

@@ -11,6 +11,10 @@ import { createQueriesColumns } from './grid-colums-queries'
 import { FlipQueryTypes } from '../../types/flipQueryTypes'
 import { AddQueryFlip } from './add-query-flip'
 
+export interface QueriesListPropsType {
+  queries: FlipQueryTypes[]
+}
+
 export const QueriesList: FC<{ queries: FlipQueryTypes[] }> = ({ queries }) => {
   const { data: rows = queries } = useGetPoeFlipQueryQuery()
   const [removeQuery] = useDeletePoeFlipQueryMutation()
