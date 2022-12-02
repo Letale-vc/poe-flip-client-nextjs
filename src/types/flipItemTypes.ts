@@ -1,6 +1,6 @@
 import { GridRowsProp } from '@mui/x-data-grid'
 
-export interface CardTypes {
+export interface FlipItemTypes {
   cardInfo: {
     priceInChaosIfFullStackSize: number
     priceInDivineIfFullStackSize: number
@@ -36,7 +36,7 @@ export interface ItemInfoType {
 }
 
 export interface PoeFlipDataType {
-  poeData: { cards: GridRowsProp<CardTypes>; gems: [] }
+  poeData: { cards: GridRowsProp<FlipItemTypes>; gems: [] }
   lastUpdate: Date
   canUpdate: boolean
 }

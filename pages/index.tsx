@@ -1,16 +1,16 @@
 import { GetServerSideProps } from 'next'
-import { Main } from '../src/components/main'
+import { Main } from '../src/components/main/main'
 import { wrapper } from '../lib/store'
-import { getPoeFlipData, getRunningQueriesThunk } from '../lib/api-config'
+import { getPoeFlipData, getRunningQueriesThunk } from '../lib/apiConfig'
 
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async () => {
     await store.dispatch(getPoeFlipData.initiate())
 
     await Promise.all(store.dispatch(getRunningQueriesThunk()))
-    const { data: flipData } = getPoeFlipData.select()(store.getState())
+    const { data } = getPoeFlipData.select()(store.getState())
     return {
-      props: { flipData }
+      props: { flipData: data || { cards: [], gems: [] } }
     }
   })
 

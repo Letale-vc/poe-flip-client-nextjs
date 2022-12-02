@@ -1,9 +1,11 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Head from 'next/head'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider, EmotionCache } from '@emotion/react'
+import { FC } from 'react'
+import { Provider } from 'react-redux'
+import { HeadWrapper } from '../src/components/head'
 import theme from '../src/theme'
 import createEmotionCache from '../src/createEmotionCache'
 import { wrapper } from '../lib/store'
@@ -15,20 +17,21 @@ interface NewAppProps extends AppProps {
   emotionCache: EmotionCache
 }
 
-const App = (props: NewAppProps) => {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+const App: FC<NewAppProps> = ({ Component, ...rest }) => {
+  const { store, props } = wrapper.useWrappedStore(rest)
+  const { emotionCache = clientSideEmotionCache, pageProps } = props
+
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>Poe Flip App</title>
-        <meta name="theme-color" content={theme.palette.primary.main} />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />{' '}
-      </ThemeProvider>
-    </CacheProvider>
+    <Provider store={store}>
+      <CacheProvider value={emotionCache}>
+        <HeadWrapper />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />{' '}
+        </ThemeProvider>
+      </CacheProvider>
+    </Provider>
   )
 }
 
-export default wrapper.withRedux(App)
+export default App
