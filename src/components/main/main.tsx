@@ -18,7 +18,7 @@ export const Main: FC<{ flipData: PoeFlipDataType }> = ({ flipData }) => {
   }
 
   useEffect(() => {
-    const interval = setInterval(refetch, 30000)
+    const interval = setInterval(refetch, 5000)
     return () => {
       clearInterval(interval)
     }
