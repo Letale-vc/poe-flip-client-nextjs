@@ -10,8 +10,12 @@ import {
 } from '../../../lib/apiConfig'
 import { columns } from './gridColumns'
 
-export const Main: FC<{ flipData: PoeFlipDataType }> = ({ flipData }) => {
-  const { data = flipData, isFetching, refetch } = useGetPoeFlipDataQuery()
+export interface MainPropsType {
+  flipData: PoeFlipDataType | null
+} 
+
+export const Main: FC<MainPropsType> = ({ flipData }) => {
+  const { data = flipData, isFetching, refetch } = useGetPoeFlipDataQuery() 
   const [startUpdateData] = useStartUpdatePoeFlipDataMutation()
   const handlerPoeTradeUpdate = () => {
     startUpdateData()
@@ -34,13 +38,13 @@ export const Main: FC<{ flipData: PoeFlipDataType }> = ({ flipData }) => {
       >
         <Button
           onClick={handlerPoeTradeUpdate}
-          disabled={!data.canUpdate || isFetching}
+          disabled={data && !data.canUpdate || isFetching}
         >
           update poe trade
         </Button>
         <Box marginLeft={2} flexGrow={1}>
           <p suppressHydrationWarning>{`Last update:  ${
-            data.lastUpdate && new Date(data.lastUpdate).toLocaleString()
+            data && new Date(data.lastUpdate).toLocaleString() || ''
           }`}</p>
         </Box>
         <Button component={Link} href="/change-queries">
@@ -50,7 +54,7 @@ export const Main: FC<{ flipData: PoeFlipDataType }> = ({ flipData }) => {
 
       <DataGrid
         getRowId={(row) => `${row.cardInfo.name}_${row.itemInfo.name}`}
-        rows={data.poeData.cards}
+        rows={data && data.poeData.cards || []}
         columns={columns}
         disableSelectionOnClick
         autoHeight
