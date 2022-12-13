@@ -1,8 +1,10 @@
 import {
   BaseQueryFn,
-  createApi,
   FetchArgs,
-  fetchBaseQuery
+  fetchBaseQuery,
+  buildCreateApi,
+  coreModule,
+  reactHooksModule
 } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 import { PoeFlipDataType } from '../src/types/flipItemTypes'
@@ -11,9 +13,14 @@ import { FlipQueryTypes, NewFlipQueryType } from '../src/types/flipQueryTypes'
 interface ErrorType {
   data: { statusCode: number; message: string[]; error: string }
 }
+
+const createApi = buildCreateApi(
+  coreModule(),
+  reactHooksModule({ unstable__sideEffectsInRender: true })
+)
 export const poeFlipApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://91.219.61.150/api'
+    baseUrl: '/api'
   }) as unknown as BaseQueryFn<string | FetchArgs, unknown, ErrorType>,
 
   // eslint-disable-next-line consistent-return

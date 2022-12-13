@@ -4,8 +4,9 @@ import { wrapper } from '../lib/store'
 import { getPoeFlipData, getRunningQueriesThunk } from '../lib/apiConfig'
 
 export const getServerSideProps: GetServerSideProps<MainPropsType> =
-  wrapper.getServerSideProps((store) => async () => {
-    await store.dispatch(getPoeFlipData.initiate())
+  wrapper.getServerSideProps( (store) => async () => {
+    
+    store.dispatch(getPoeFlipData.initiate())
 
     await Promise.all(store.dispatch(getRunningQueriesThunk()))
     const { data } = getPoeFlipData.select()(store.getState())
