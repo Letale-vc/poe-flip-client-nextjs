@@ -41,10 +41,10 @@ export const poeFlipApi = createApi({
         result
           ? [
               ...result.map(
-                ({ uuid }) => ({ type: 'flipQueries', uuid } as const)
+                (data) => ({ type: 'flipQueries', ...data } as const)
               )
             ]
-          : [{ type: 'flipQueries', uuid: 'newQuery' }]
+          : []
     }),
     deletePoeFlipQuery: builder.mutation<void, FlipQueryTypes>({
       query: (arg) => ({
@@ -70,8 +70,8 @@ export const poeFlipApi = createApi({
         method: 'PUT',
         body: arg
       }),
-      invalidatesTags: (result, error, { uuid }) => [
-        { type: 'flipQueries', uuid }
+      invalidatesTags: (result, error, data) => [
+        { type: 'flipQueries', ...data }
       ]
     })
   })
