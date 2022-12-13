@@ -52,8 +52,8 @@ export const poeFlipApi = createApi({
         method: 'DELETE',
         body: arg
       }),
-      invalidatesTags: (result, error, { uuid }) => [
-        { type: 'flipQueries', uuid }
+      invalidatesTags: (result, error, data) => [
+        { type: 'flipQueries', ...data }
       ]
     }),
     addFlipQuery: builder.mutation<void, NewFlipQueryType>({
