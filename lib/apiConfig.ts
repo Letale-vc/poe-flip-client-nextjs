@@ -20,7 +20,7 @@ const createApi = buildCreateApi(
 )
 export const poeFlipApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api'
+    baseUrl: 'http://91.219.61.150/api'
   }) as unknown as BaseQueryFn<string | FetchArgs, unknown, ErrorType>,
 
   // eslint-disable-next-line consistent-return
