@@ -13,7 +13,7 @@ interface ErrorType {
 }
 export const poeFlipApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api'
+    baseUrl: '/api'
   }) as unknown as BaseQueryFn<string | FetchArgs, unknown, ErrorType>,
 
   // eslint-disable-next-line consistent-return
