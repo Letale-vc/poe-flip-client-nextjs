@@ -16,7 +16,7 @@ export interface QueriesListPropsType {
 }
 
 export const QueriesList: FC<{ queries: FlipQueryTypes[] }> = ({ queries }) => {
-  const { data: rows = queries } = useGetPoeFlipQueryQuery()
+  const { data = queries } = useGetPoeFlipQueryQuery()
   const [removeQuery] = useDeletePoeFlipQueryMutation()
   const [editQuery] = useEditFlipQueryMutation()
 
@@ -81,7 +81,7 @@ export const QueriesList: FC<{ queries: FlipQueryTypes[] }> = ({ queries }) => {
       <div>
         <DataGrid
           getRowId={(row) => JSON.parse(row.cardQuery).query?.type}
-          rows={rows}
+          rows={data}
           columns={queriesColumns}
           disableSelectionOnClick
           autoHeight
